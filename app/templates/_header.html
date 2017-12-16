@@ -1,0 +1,25 @@
+    <header class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home') }}">Home<span class="sr-only">(current)</span></a>
+                </li>
+                {% if g.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('user', username=g.user.username) }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('logout') }}">LogOut</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signin') }}">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <a href="{{ url_for('index') }}"><h3 class="text-muted">PyBlog - S2S</h3></a>
+    </header>

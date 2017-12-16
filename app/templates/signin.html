@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block container %}
+{% include '_header.html' %}
+    <div class="jumbotron">
+        <h1>Blog App</h1>
+        {% if form.errors %}
+            {% for f in form.errors %}
+                {% for e in form.errors[f] %}
+                    {% include '_alert-danger.html' %}
+                {% endfor %}
+            {% endfor %}
+        {% endif%}
+
+        {% if get_flashed_messages() %}
+            {% for e in get_flashed_messages() %}
+                {% include '_alert-success.html' %}
+            {% endfor %}
+        {% endif %}
+        <form class="form-signin" action="" method="post" name="login">
+            {{ form.hidden_tag() }}
+            {{ form.username.label(class_="sr-only") }}
+            {{ form.username(class_="form-control", placeholder="Username", required=True, autofocus=True)}}
+            <br>
+            {{ form.password.label(class_="sr-only")}}
+            {{ form.password(class_="form-control", placeholder="Password") }}
+            <br>
+            <div class="checkbox">
+                <lable>
+                    {{ form.remember_me(type="checkbox", value="remember_me") }}Remember me
+                </lable>
+            </div>
+            <br>
+            {{ form.submit(class_="btn btn-lg btn-primary btn-block") }}
+        </form>
+    </div>
+{% include '_footer.html' %}
+{% endblock %}

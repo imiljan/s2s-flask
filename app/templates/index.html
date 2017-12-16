@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% block container %}
+{% include '_header.html' %}
+    <main role="main">
+        <div class="jumbotron">
+            <h1>PyBlog - S2S</h1>
+            {% if get_flashed_messages() %}
+                {% for e in get_flashed_messages() %}
+                    {% include '_alert-success.html' %}
+                {% endfor %}
+            {% endif %}
+            <p class="lead">Welcome all! ...</p>
+            <p><a class="btn btn-lg btn-success" href="{{ url_for('signin') }}" role="button">Sign
+                In</a></p>
+        </div>
+
+        <div class="row marketing">
+            <div class="col-lg-12">
+                {% for p in posts.items %}
+                    {% include '_post.html' %}
+                {% endfor %}
+
+                {% if posts.has_prev %}<a href="{{ url_for('index', page=posts.prev_num) }}">&lt;&lt; Newer posts</a>
+                {% else %}&lt;&lt; Newer posts {% endif %} |
+                {% if posts.has_next %}<a href="{{ url_for('index', page=posts.next_num) }}">Older posts &gt;&gt;</a>
+                {% else %}Older posts &gt;&gt;{% endif %}
+            </div>
+        </div>
+    </main>
+{% include '_footer.html' %}
+{% endblock %}
